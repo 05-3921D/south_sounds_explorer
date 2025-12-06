@@ -1,0 +1,25 @@
+DEBUG EXCEPTION: 8 validation errors for SearchResults
+albums.0.artists
+  Field required [type=missing, input_value={'name': 'Test Album', 'id': '1', 'images': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+albums.0.release_date
+  Field required [type=missing, input_value={'name': 'Test Album', 'id': '1', 'images': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+albums.0.total_tracks
+  Field required [type=missing, input_value={'name': 'Test Album', 'id': '1', 'images': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+albums.0.external_urls
+  Field required [type=missing, input_value={'name': 'Test Album', 'id': '1', 'images': []}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+tracks.0.artists
+  Field required [type=missing, input_value={'name': 'Test Track', 'i..., 'duration_ms': 300000}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+tracks.0.album
+  Field required [type=missing, input_value={'name': 'Test Track', 'i..., 'duration_ms': 300000}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+tracks.0.popularity
+  Field required [type=missing, input_value={'name': 'Test Track', 'i..., 'duration_ms': 300000}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing
+tracks.0.external_urls
+  Field required [type=missing, input_value={'name': 'Test Track', 'i..., 'duration_ms': 300000}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.12/v/missing

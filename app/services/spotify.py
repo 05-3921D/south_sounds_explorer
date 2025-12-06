@@ -5,11 +5,12 @@ from app.config import settings
 
 #Maneja la autenticación automáticamente.
 class SpotifyClient:
-    def __init__(self):
+    def __init__(self, http_client: httpx.AsyncClient):
         self.auth_url = "https://accounts.spotify.com/api/token"
         self.base_url = "https://api.spotify.com/v1"
         self.access_token = None
         self.token_expiry = 0
+        self.client = http_client
 
 #Pide un token nuevo a Spotify solo si el anterior ya expiró
     async def _get_token(self):
@@ -28,18 +29,17 @@ class SpotifyClient:
         }
         data = {"grant_type": "client_credentials"}
 
-        async with httpx.AsyncClient() as client:
-            response = await client.post(self.auth_url, headers=headers, data=data)
-            response.raise_for_status()
-            token_data = response.json()
-            
-            self.access_token = token_data["access_token"]
-            # Set de tiempo expiración
-            self.token_expiry = time.time() + token_data["expires_in"] - 60
+        response = await self.client.post(self.auth_url, headers=headers, data=data)
+        response.raise_for_status()
+        token_data = response.json()
+        
+        self.access_token = token_data["access_token"]
+        # Set de tiempo expiración
+        self.token_expiry = time.time() + token_data["expires_in"] - 60
             
         return self.access_token
 
-#Metodo para buscar álbumes y canciones
+#Metodo para buscar álbumes y canciones. Crea solo un cliente http para todas las peticiones.
     async def search(self, query: str, type: str = "album,track", limit: int = 10):
         token = await self._get_token()
         headers = {"Authorization": f"Bearer {token}"}
@@ -49,7 +49,6 @@ class SpotifyClient:
             "limit": limit
         }
 
-        async with httpx.AsyncClient() as client:
-            response = await client.get(f"{self.base_url}/search", headers=headers, params=params)
-            response.raise_for_status()
-            return response.json()
+        response = await self.client.get(f"{self.base_url}/search", headers=headers, params=params)
+        response.raise_for_status()
+        return response.json()
