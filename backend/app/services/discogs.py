@@ -32,6 +32,10 @@ def get_random_countries(limit: int = 6) -> List[str]:
     return random.sample(LATAM_COUNTRIES, min(limit, len(LATAM_COUNTRIES)))
 
 
+from app.services.ai_curator import AICurator
+
+# ... (Previous imports and variables)
+
 class DiscogsClient:
     BASE_URL = "https://api.discogs.com"
 
@@ -41,6 +45,7 @@ class DiscogsClient:
             "User-Agent": "SouthSoundsExplorer/0.1",
             "Authorization": f"Discogs key={settings.DISCOGS_CONSUMER_KEY}, secret={settings.DISCOGS_CONSUMER_SECRET}"
         }
+        self.ai_curator = AICurator()
 
     async def search(self, query: str = None, sort_by: str = "relevance", page: int = 1) -> Dict[str, Any]:
         """
@@ -98,6 +103,16 @@ class DiscogsClient:
             data = response.json()
             
             filtered_results = self._filter_results(data.get("results", []))
+            
+            # AI Curation Step
+            # Only curate if we have enough results and curation is enabled
+            if filtered_results and self.ai_curator.enabled:
+                # Limit batch to top 20 to avoid slow response time
+                curated_results = await self.ai_curator.filter_batch(filtered_results[:20])
+                if curated_results:
+                     # Add remaining un-curated if any? No, better safe than sorry.
+                     return {"results": curated_results}
+            
             return {"results": filtered_results}
             
         except httpx.HTTPError as e:
@@ -120,4 +135,4 @@ class DiscogsClient:
                 
             filtered.append(item)
             
-        return filtered[:20] # Return top 20 after filtering
+        return filtered[:50] # Return top 50 before AI curation to give AI enough candidates
