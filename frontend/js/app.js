@@ -5,7 +5,7 @@
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_URL = IS_LOCAL
     ? "http://localhost:8000/api/search"
-    : "https://south-sounds-explorer.onrender.com";
+    : "https://south-sounds-explorer.onrender.com/api/search";
 
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
