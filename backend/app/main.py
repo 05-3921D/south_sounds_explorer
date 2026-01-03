@@ -28,7 +28,7 @@ app = FastAPI(
 # 1. Trusted Host (Prevent Host Header Attacks)
 app.add_middleware(
     TrustedHostMiddleware, 
-    allowed_hosts=["localhost", "127.0.0.1", "*.yourdomain.com"] # Add your production domain
+    allowed_hosts=["localhost", "127.0.0.1", "south-sounds-explorer.onrender.com", "*.onrender.com"] 
 )
 
 # 2. CORS (Restrict frontend access)
