@@ -58,6 +58,7 @@ class DiscogsClient:
             # Check if query is actually a known Style (Genre Mode)
             # Case insensitive check
             matching_style = next((s for s in ELECTRONIC_STYLES if s.lower() == query.lower()), None)
+            matching_country = next((c for c in LATAM_COUNTRIES if c.lower() == query.lower()), None)
             
             if matching_style:
                 # User clicked a Genre Chip or searched for a specific style.
@@ -68,6 +69,11 @@ class DiscogsClient:
                 params["country"] = random_country
                 params["style"] = matching_style
                 # We remove 'q' so it doesn't do a text search, but relies on strict Style filter
+            elif matching_country:
+                # User clicked a Country Chip or searched for a country name.
+                # Use strict country filter
+                params["country"] = matching_country
+                # format=Vinyl, CD etc? No, let's keep it broad.
             else:
                 # Normal Text Search (Artist, Album name)
                 params["q"] = query
