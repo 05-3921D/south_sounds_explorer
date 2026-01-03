@@ -1,74 +1,80 @@
-# South Sounds Explorer 🎵
+# South Sounds Explorer 🎵🌎
 
-Explorador de música electrónica latinoamericana construido con **FastAPI** y **Vanilla JS**, potenciado por la API de **Discogs**.
+Explorador de música electrónica latinoamericana. Descubre gemas ocultas, desde Techno en Chile hasta House en Colombia, todo potenciado por la inmensa base de datos de **Discogs**.
 
-## Requisitos
-- **Python 3.12+**
-- **uv** (Gestor de paquetes de Python)
-- **Discogs Personal Access Token**
+🔗 **Live Demo**: [southsoundexplorer.netlify.app](https://southsoundexplorer.netlify.app)  
+*(Backend hospedado en Render, puede tardar 30s en "despertar" la primera vez)*
 
-## Instalación
+## ✨ Características
 
-1. **Clonar/Abrir** el proyecto.
-2. **Configurar Entorno**:
-   - Crea un archivo `.env` en la raíz con tus credenciales de Discogs:
-     ```env
-     DISCOGS_CONSUMER_KEY="tu_key"
-     DISCOGS_CONSUMER_SECRET="tu_secret" 
-     # Nota: Actualmente usamos autenticación simple de Discogs, 
-     # asegúrate de que tu cliente esté configurado correctamente.
-     ```
-3. **Instalar Dependencias**:
-   ```bash
-   uv sync
-   ```
+*   **Búsqueda Inteligente**: Encuentra artistas y lanzamientos filtrados automáticamente por:
+    *   🌍 Región: Solo países de Latinoamérica.
+    *   🎹 Estilo: Solo géneros electrónicos (Techno, House, Ambient, etc.).
+*   **Sugerencias Dinámicas**:
+    *   **Por Género**: Descubre estilos aleatorios ("Tribal", "Dub Techno", "Deep House") cada vez que entras.
+    *   **Por País**: Explora escenas locales aleatorias ("Peru", "Argentina", "Mexico").
+*   **Ordenamiento**: Alterna fácilmente entre los resultados más **Relevantes** o los más **Recientes**.
+*   **Paginación**: Carga infinita de resultados con el botón "Cargar más".
+*   **Diseño Moderno**: Interfaz estilo "Glassmorphism" con scroll suave y chips interactivos.
 
-## Cómo Iniciar 🚀
+## 🛠️ Tecnologías
+
+### Backend
+*   **Python 3.12**
+*   **FastAPI**: API REST rápida y moderna.
+*   **Httpx**: Cliente HTTP asíncrono para conectar con Discogs.
+*   **Pydantic**: Validación de datos robusta.
+
+### Frontend
+*   **Vanilla JS**: Sin frameworks pesados, solo JS moderno y rápido.
+*   **CSS3**: Variables CSS, Flexbox, Grid y efectos de transparencia.
+*   **HTML5**: Semántico y accesible.
+
+## 🚀 Instalación Local
+
+1.  **Clonar** el proyecto.
+2.  **Configurar Entorno**:
+    Crea un archivo `.env` en la raíz con tus credenciales de [Discogs Developer](https://www.discogs.com/settings/developers):
+    ```env
+    DISCOGS_CONSUMER_KEY="tu_key"
+    DISCOGS_CONSUMER_SECRET="tu_secret" 
+    ```
+3.  **Instalar Dependencias**:
+    Requiere [uv](https://github.com/astral-sh/uv).
+    ```bash
+    uv sync
+    ```
+
+## ▶️ Cómo Ejecutar
 
 Necesitas dos terminales abiertas:
 
-### Terminal 1: Backend (API)
-Inicia el servidor de FastAPI:
+**1. Backend (API)**
 ```bash
 uv run scripts/start_backend.py
 ```
-> El backend correrá en: `http://localhost:8000`
->
-> Documentación interactiva (Swagger): `http://localhost:8000/docs`
+> Corre en: `http://localhost:8000` | Docs: `http://localhost:8000/docs`
 
-### Terminal 2: Frontend (UI)
-Inicia el servidor estático para la interfaz:
+**2. Frontend (UI)**
 ```bash
 uv run scripts/start_frontend.py
 ```
-> El frontend correrá en: `http://localhost:5500`
+> Corre en: `http://localhost:5500`
 
-## Características y Uso
+## ☁️ Despliegue
 
-- **Búsqueda Filtrada**: Busca artistas y el sistema filtrará automáticamente releases de **Latinoamérica** y géneros **Electrónicos** (Techno, House, Dubstep, IDM, etc.).
-- **Ordenamiento**: Usa el selector en la UI para ver los lanzamientos "Destacados" (Relevancia) o los "Más Recientes".
+El proyecto está configurado para un despliegue gratuito y escalable:
+*   **Backend**: Render (Web Service).
+*   **Frontend**: Netlify / Vercel (Static Site).
 
-## Testing 🧪
+Consulta la guía detallada en [DEPLOY.md](./DEPLOY.md).
 
-Los tests se encuentran en `backend/tests`.
+## 🧪 Testing
 
-- **Tests Automáticos** (pytest):
-  ```bash
-  uv run python -m pytest
-  ```
+```bash
+# Ejecutar tests automatizados
+uv run python -m pytest
+```
 
-- **Verificación Manual** (Script):
-  ```bash
-  uv run backend/tests/verify_discogs_manual.py
-  ```
-
-## Estructura del Proyecto
-
-- `/backend`: Lógica del servidor (FastAPI).
-  - `/app/api`: Definición de rutas y endpoints.
-  - `/app/core`: Configuraciones.
-  - `/app/services`: Integración con **Discogs** (`discogs.py`).
-  - `/tests`: Tests unitarios y manuales.
-- `/frontend`: Interfaz de usuario (HTML/CSS/JS).
-- `/scripts`: Scripts de ejecución (`start_backend.py`, `start_frontend.py`).
-- `/logs`: Archivos de registro de la aplicación.
+---
+Hecho con 💜 por [Tu Nombre]
