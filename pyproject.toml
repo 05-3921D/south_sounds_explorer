@@ -14,8 +14,8 @@ dependencies = [
 
 [tool.pytest.ini_options]
 asyncio_mode = "auto"
-pythonpath = "."
-testpaths = ["tests"]
+pythonpath = [".", "backend"]
+testpaths = ["backend/tests"]
 
 [dependency-groups]
 dev = [

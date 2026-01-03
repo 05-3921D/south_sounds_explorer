@@ -2,8 +2,10 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-from app.routers import search
-from app.logging_config import setup_logging
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
+from app.api.v1.endpoints import search
+from app.core.logging_config import setup_logging
+from app.core.config import settings
 import logging
 
 @asynccontextmanager
@@ -21,11 +23,20 @@ app = FastAPI(
     lifespan=lifespan
 )
 
+# Security Middlewares
+
+# 1. Trusted Host (Prevent Host Header Attacks)
+app.add_middleware(
+    TrustedHostMiddleware, 
+    allowed_hosts=["localhost", "127.0.0.1", "*.yourdomain.com"] # Add your production domain
+)
+
+# 2. CORS (Restrict frontend access)
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], # En producción, reemplazar con URL del frontend
+    allow_origins=settings.BACKEND_CORS_ORIGINS, 
     allow_credentials=True,
-    allow_methods=["*"],
+    allow_methods=["GET", "POST", "OPTIONS"], # Limit methods if possible
     allow_headers=["*"],
 )
 

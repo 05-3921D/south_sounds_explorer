@@ -3,7 +3,7 @@ import socketserver
 import os
 
 PORT = 5500
-DIRECTORY = "frontend"
+DIRECTORY = os.path.join(os.path.dirname(__file__), "..", "frontend")
 
 class Handler(http.server.SimpleHTTPRequestHandler):
     def __init__(self, *args, **kwargs):
