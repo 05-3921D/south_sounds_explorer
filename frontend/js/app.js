@@ -129,7 +129,7 @@ async function loadSuggestions() {
             btn.className = 'chip animation-fade-in';
             btn.textContent = genre;
             btn.addEventListener('click', () => {
-                searchInput.value = genre;
+                searchInput.value = ""; // Clear input for better UX
                 doSearch(genre);
             });
             genreChipsContainer.appendChild(btn);
@@ -148,7 +148,7 @@ async function loadSuggestions() {
             btn.className = 'chip animation-fade-in';
             btn.textContent = country;
             btn.addEventListener('click', () => {
-                searchInput.value = country;
+                searchInput.value = ""; // Clear for better UX
                 // Just searching by Text will work fine for countries
                 doSearch(country);
             });
