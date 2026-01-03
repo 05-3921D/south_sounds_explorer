@@ -77,4 +77,6 @@ uv run python -m pytest
 ```
 
 ---
-Hecho con 💜 por [Tu Nombre]
+FTPWW 24-7 
+🔥🔥👮‍♂️🚓🔥🔥
+
