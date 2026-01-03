@@ -5,7 +5,7 @@
 const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
 const API_URL = IS_LOCAL
     ? "http://localhost:8000/api/search"
-    : "https://south-sounds-explorer-api.onrender.com/api/search"; // REEMPLAZAR con tu URL real de Render cuando la tengas.
+    : "https://south-sounds-explorer.onrender.com";
 
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
