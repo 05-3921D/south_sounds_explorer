@@ -1,4 +1,11 @@
-const API_URL = "http://localhost:8000/api/search";
+// Configuración de API URL
+// Si estamos en local, usa el puerto 8000. Si estamos en producción (ej. Render, Vercel), usa la URL relativa o la que definas.
+// Para este setup, asumiremos que en producción el usuario configurará la URL del backend manualmente o usará el mismo dominio si sirve ambos.
+// Una estrategia común simple para separar frontend/backend en servicios gratuitos:
+const IS_LOCAL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+const API_URL = IS_LOCAL
+    ? "http://localhost:8000/api/search"
+    : "https://south-sounds-explorer-api.onrender.com/api/search"; // REEMPLAZAR con tu URL real de Render cuando la tengas.
 
 const searchInput = document.getElementById('searchInput');
 const searchBtn = document.getElementById('searchBtn');
